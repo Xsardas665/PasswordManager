@@ -4,6 +4,8 @@
 import hashlib
 from datetime import datetime
 from datetime import date
+#
+from cryptography.fernet import Fernet
 
 
 # Function for creating SHA256 hash of master password
@@ -11,6 +13,10 @@ def hash_master_password(password):
     sha256 = hashlib.sha256()
     sha256.update(password.encode())
     return sha256.hexdigest()
+
+
+def generate_key():
+    return Fernet.generate_key()
 
 
 # Custom Function for logging into Console.
