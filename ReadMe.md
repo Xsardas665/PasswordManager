@@ -4,4 +4,7 @@ Password Manager is Python project which main purpose is to exercise usage of py
 ### Current Status : In Development
 
 - [X] Hashing Master Password [SHA256]
-- [ ] Logging into file
+- [X] Logging into file
+- [X] User Registration
+- [ ] Multiple Users
+- [X] JSON usage
