@@ -8,6 +8,7 @@ import json
 # os is a library for interacting with the operating system,
 # allowing to perform tasks like file and directory manipulation.
 import os
+import sys
 from datetime import datetime
 from datetime import date
 # cryptography.fernet it is part of the cryptography library,
@@ -60,6 +61,23 @@ def register(username, master_password):
                 print_log(0, "Registration of user: " + username + " completed!")
         except Exception as e:
             print_log(1, str(e))
+
+
+# Function for logging users
+def login(username, entered_password):
+    try:
+        with open('user_data.json', 'r') as file:
+            user_data = json.load(file)
+        stored_password_hash = user_data.get('master_password')
+        entered_password_hash = hash_master_password(entered_password)
+        if entered_password_hash == stored_password_hash and username == user_data.get('username'):
+            print_log(0, "Login Successful")
+        else:
+            print_log(1, "Invalid Login credentials.")
+            sys.exit()
+    except Exception as e:
+        print_log(1, "User not registered" + str(e))
+        sys.exit()
 
 
 # Custom Function for logging into Console.
