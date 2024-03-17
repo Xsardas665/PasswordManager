@@ -63,7 +63,6 @@ def register(username, master_password):
 
 
 # Custom Function for logging into Console.
-# TODO: Add logging into logfile
 def print_log(log_type, text):
     filename = "journal.log"
     now = datetime.now()
