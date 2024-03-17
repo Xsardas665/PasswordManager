@@ -80,6 +80,19 @@ def login(username, entered_password):
         sys.exit()
 
 
+# Function to view saved entries.
+def view_entries():
+    try:
+        with open('passwords.json', 'r') as data:
+            view = json.load(data)
+            print("\nYour Entries :\n")
+            for x in view:
+                print(x['Entry'])
+            print('\n')
+    except FileNotFoundError:
+        print("\n[-] You have not saved any passwords!\n")
+
+
 # Custom Function for logging into Console.
 def print_log(log_type, text):
     filename = "journal.log"
