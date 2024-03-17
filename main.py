@@ -85,12 +85,14 @@ def view_entries():
     try:
         with open('passwords.json', 'r') as data:
             view = json.load(data)
+            print_log(2, "Successfully retrieved Entries.")
             print("\nYour Entries :\n")
             for x in view:
                 print(x['Entry'])
             print('\n')
     except FileNotFoundError:
-        print("\n[-] You have not saved any passwords!\n")
+        print_log(2, "No Credentials saved.")
+        print("\n[-] You have not saved any Credentials!\n")
 
 
 # Custom Function for logging into Console.
