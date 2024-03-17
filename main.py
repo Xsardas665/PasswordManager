@@ -127,6 +127,17 @@ def print_log(log_type, text):
 
 def main():
     print_log(2, "Password Manager Started!")
+    # Load or generate the encryption key.
+    key_filename = 'encryption_key.key'
+    if os.path.exists(key_filename):
+        with open(key_filename, 'rb') as key_file:
+            key = key_file.read()
+    else:
+        key = generate_key()
+        with open(key_filename, 'wb') as key_file:
+            key_file.write(key)
+
+    cipher = initialize_cipher(key)
 
 
 if __name__ == '__main__':
