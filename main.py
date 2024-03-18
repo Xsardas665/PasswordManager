@@ -48,7 +48,7 @@ def register(username, master_password):
     # Encrypt the master password before storing it
     hashed_master_password = hash_master_password(master_password)
     user_data = {'username': username, 'master_password': hashed_master_password}
-    file_name = 'user_data.json'
+    file_name = './data/user_data.json'
     if os.path.exists(file_name) and os.path.getsize(file_name) == 0:
         with open(file_name, 'w') as file:
             json.dump(user_data, file)
@@ -66,7 +66,7 @@ def register(username, master_password):
 # Function for logging users
 def login(username, entered_password):
     try:
-        with open('user_data.json', 'r') as file:
+        with open('./data/user_data.json', 'r') as file:
             user_data = json.load(file)
         stored_password_hash = user_data.get('master_password')
         entered_password_hash = hash_master_password(entered_password)
@@ -83,7 +83,7 @@ def login(username, entered_password):
 # Function to view saved entries.
 def view_entries():
     try:
-        with open('passwords.json', 'r') as data:
+        with open('./data/passwords.json', 'r') as data:
             view = json.load(data)
             print_log(2, "Successfully retrieved Entries.")
             print("\nYour Entries :\n")
@@ -97,7 +97,7 @@ def view_entries():
 
 # Custom Function for logging into Console.
 def print_log(log_type, text):
-    filename = "journal.log"
+    filename = "./data/journal.log"
     now = datetime.now()
     current_time = now.strftime("%H:%M:%S")
     try:
@@ -126,9 +126,12 @@ def print_log(log_type, text):
 
 
 def main():
+    if not os.path.exists('data'):
+        os.makedirs('data')
+        print_log(2, "Data Catalog Created.")
     print_log(2, "Password Manager Started!")
     # Load or generate the encryption key.
-    key_filename = 'encryption_key.key'
+    key_filename = './data/encryption_key.key'
     if os.path.exists(key_filename):
         with open(key_filename, 'rb') as key_file:
             key = key_file.read()
